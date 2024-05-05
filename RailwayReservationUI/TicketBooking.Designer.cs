@@ -48,12 +48,12 @@
             txtStation = new TextBox();
             lblResetForm = new LinkLabel();
             pnlTrainsForm = new Panel();
-            comboBox2 = new ComboBox();
+            cmbRoute = new ComboBox();
             btnSaveTrain = new Button();
             panel3 = new Panel();
             lblTrainHeading = new Label();
             txtNoOfCoaches = new TextBox();
-            txtDescriptions = new TextBox();
+            txtDescription = new TextBox();
             txtTrainName = new TextBox();
             pnlRouteForm = new Panel();
             cmbDestination = new ComboBox();
@@ -370,29 +370,30 @@
             // pnlTrainsForm
             // 
             pnlTrainsForm.BackColor = SystemColors.ActiveCaptionText;
-            pnlTrainsForm.Controls.Add(comboBox2);
+            pnlTrainsForm.Controls.Add(cmbRoute);
             pnlTrainsForm.Controls.Add(btnSaveTrain);
             pnlTrainsForm.Controls.Add(panel3);
             pnlTrainsForm.Controls.Add(txtNoOfCoaches);
-            pnlTrainsForm.Controls.Add(txtDescriptions);
+            pnlTrainsForm.Controls.Add(txtDescription);
             pnlTrainsForm.Controls.Add(txtTrainName);
             pnlTrainsForm.Font = new Font("Segoe UI", 9.75F, FontStyle.Regular, GraphicsUnit.Point);
-            pnlTrainsForm.Location = new Point(24, 323);
+            pnlTrainsForm.Location = new Point(24, 196);
             pnlTrainsForm.Name = "pnlTrainsForm";
             pnlTrainsForm.Size = new Size(472, 395);
             pnlTrainsForm.TabIndex = 1;
             pnlTrainsForm.Visible = false;
             // 
-            // comboBox2
+            // cmbRoute
             // 
-            comboBox2.BackColor = SystemColors.ActiveCaptionText;
-            comboBox2.Font = new Font("Segoe UI", 11.25F, FontStyle.Regular, GraphicsUnit.Point);
-            comboBox2.ForeColor = SystemColors.HighlightText;
-            comboBox2.FormattingEnabled = true;
-            comboBox2.Location = new Point(29, 252);
-            comboBox2.Name = "comboBox2";
-            comboBox2.Size = new Size(206, 28);
-            comboBox2.TabIndex = 32;
+            cmbRoute.BackColor = SystemColors.ActiveCaptionText;
+            cmbRoute.Font = new Font("Segoe UI", 11.25F, FontStyle.Regular, GraphicsUnit.Point);
+            cmbRoute.ForeColor = SystemColors.HighlightText;
+            cmbRoute.FormattingEnabled = true;
+            cmbRoute.Location = new Point(29, 252);
+            cmbRoute.Name = "cmbRoute";
+            cmbRoute.Size = new Size(206, 28);
+            cmbRoute.TabIndex = 32;
+            cmbRoute.Text = "Select Route";
             // 
             // btnSaveTrain
             // 
@@ -412,6 +413,7 @@
             btnSaveTrain.Text = "Save Train Details";
             btnSaveTrain.TextAlign = ContentAlignment.BottomCenter;
             btnSaveTrain.UseVisualStyleBackColor = false;
+            btnSaveTrain.Click += btnSaveTrain_Click;
             // 
             // panel3
             // 
@@ -449,18 +451,18 @@
             txtNoOfCoaches.TabIndex = 12;
             txtNoOfCoaches.WordWrap = false;
             // 
-            // txtDescriptions
+            // txtDescription
             // 
-            txtDescriptions.BackColor = SystemColors.InactiveCaptionText;
-            txtDescriptions.BorderStyle = BorderStyle.FixedSingle;
-            txtDescriptions.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
-            txtDescriptions.ForeColor = SystemColors.HighlightText;
-            txtDescriptions.Location = new Point(29, 115);
-            txtDescriptions.Multiline = true;
-            txtDescriptions.Name = "txtDescriptions";
-            txtDescriptions.PlaceholderText = "Description";
-            txtDescriptions.Size = new Size(433, 86);
-            txtDescriptions.TabIndex = 11;
+            txtDescription.BackColor = SystemColors.InactiveCaptionText;
+            txtDescription.BorderStyle = BorderStyle.FixedSingle;
+            txtDescription.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
+            txtDescription.ForeColor = SystemColors.HighlightText;
+            txtDescription.Location = new Point(29, 115);
+            txtDescription.Multiline = true;
+            txtDescription.Name = "txtDescription";
+            txtDescription.PlaceholderText = "Description";
+            txtDescription.Size = new Size(433, 86);
+            txtDescription.TabIndex = 11;
             // 
             // txtTrainName
             // 
@@ -742,13 +744,13 @@
         private ComboBox cmbDeparture;
         private Button btnTrain;
         private Panel pnlTrainsForm;
-        private ComboBox comboBox2;
+        private ComboBox cmbRoute;
         private Button btnSaveTrain;
         private Panel panel3;
         private Label lblTrainHeading;
         private TextBox txtNoOfCoaches;
         private TextBox txtTrainName;
-        private TextBox txtDescriptions;
+        private TextBox txtDescription;
         private DataGridView dataGridView;
         private Panel pnlSeach;
         private Button btnGo;
