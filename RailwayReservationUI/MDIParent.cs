@@ -136,5 +136,12 @@ namespace RailwayReservationUI
             ticketBooking.MdiParent = this;
             ticketBooking.Show();
         }
+
+        private void btnReservations_Click(object sender, EventArgs e)
+        {
+            TicketReservation ticketReservation = new TicketReservation();
+            ticketReservation.MdiParent = this;
+            ticketReservation.Show();
+        }
     }
 }

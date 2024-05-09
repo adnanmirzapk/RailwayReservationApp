@@ -83,6 +83,7 @@
             aboutToolStripMenuItem = new ToolStripMenuItem();
             menuStrip = new MenuStrip();
             pnlLeftMenu = new Panel();
+            btnReservations = new Button();
             Logout = new LinkLabel();
             lblUserName = new Label();
             profilePicture = new PictureBox();
@@ -495,6 +496,7 @@
             // pnlLeftMenu
             // 
             pnlLeftMenu.BackColor = SystemColors.ActiveCaptionText;
+            pnlLeftMenu.Controls.Add(btnReservations);
             pnlLeftMenu.Controls.Add(Logout);
             pnlLeftMenu.Controls.Add(lblUserName);
             pnlLeftMenu.Controls.Add(profilePicture);
@@ -507,6 +509,29 @@
             pnlLeftMenu.Name = "pnlLeftMenu";
             pnlLeftMenu.Size = new Size(194, 842);
             pnlLeftMenu.TabIndex = 4;
+            // 
+            // btnReservations
+            // 
+            btnReservations.BackColor = Color.Transparent;
+            btnReservations.FlatAppearance.BorderColor = Color.FromArgb(255, 224, 192);
+            btnReservations.FlatAppearance.BorderSize = 0;
+            btnReservations.FlatAppearance.MouseDownBackColor = Color.DarkSlateGray;
+            btnReservations.FlatAppearance.MouseOverBackColor = Color.DarkSlateGray;
+            btnReservations.FlatStyle = FlatStyle.Flat;
+            btnReservations.Font = new Font("Century Gothic", 11.25F, FontStyle.Bold, GraphicsUnit.Point);
+            btnReservations.ForeColor = SystemColors.Control;
+            btnReservations.Image = (Image)resources.GetObject("btnReservations.Image");
+            btnReservations.ImageAlign = ContentAlignment.MiddleLeft;
+            btnReservations.Location = new Point(0, 456);
+            btnReservations.Name = "btnReservations";
+            btnReservations.Padding = new Padding(10, 0, 0, 0);
+            btnReservations.Size = new Size(194, 83);
+            btnReservations.TabIndex = 11;
+            btnReservations.Text = "   Ticket &Booking";
+            btnReservations.TextAlign = ContentAlignment.MiddleLeft;
+            btnReservations.TextImageRelation = TextImageRelation.ImageBeforeText;
+            btnReservations.UseVisualStyleBackColor = false;
+            btnReservations.Click += btnReservations_Click;
             // 
             // Logout
             // 
@@ -558,7 +583,7 @@
             btnExit.ForeColor = SystemColors.Control;
             btnExit.Image = (Image)resources.GetObject("btnExit.Image");
             btnExit.ImageAlign = ContentAlignment.MiddleLeft;
-            btnExit.Location = new Point(3, 456);
+            btnExit.Location = new Point(0, 545);
             btnExit.Name = "btnExit";
             btnExit.Padding = new Padding(10, 0, 0, 0);
             btnExit.Size = new Size(191, 83);
@@ -586,7 +611,7 @@
             btnTicketBooking.Padding = new Padding(10, 0, 0, 0);
             btnTicketBooking.Size = new Size(194, 83);
             btnTicketBooking.TabIndex = 6;
-            btnTicketBooking.Text = "   Ticket &Booking";
+            btnTicketBooking.Text = "   Administration";
             btnTicketBooking.TextAlign = ContentAlignment.MiddleLeft;
             btnTicketBooking.TextImageRelation = TextImageRelation.ImageBeforeText;
             btnTicketBooking.UseVisualStyleBackColor = false;
@@ -729,6 +754,7 @@
         private PictureBox profilePicture;
         private LinkLabel Logout;
         public Label lblUserName;
+        private Button btnReservations;
     }
 }
 

@@ -155,7 +155,7 @@ namespace RailwayReservationUI
         private void btnGo_Click(object sender, EventArgs e)
         {
             string searchQuery = "Select Id, FirstName, LastName, CNIC, DateOfBirth, City, Email, ContactNumber, Designation, Department from Employees Where CNIC = @CNIC";
-            FillGridViewWithEmployeeData(searchQuery, "Id", txtSearchText.Text);
+            FillGridViewWithEmployeeData(searchQuery, "CNIC", txtSearchText.Text);
         }
 
         private void btnEmployeeSearch_Click(object sender, EventArgs e)
@@ -212,7 +212,6 @@ namespace RailwayReservationUI
 
             }
         }
-
 
         //Private method to reset the employee data form.
         private void ResetFormFields()

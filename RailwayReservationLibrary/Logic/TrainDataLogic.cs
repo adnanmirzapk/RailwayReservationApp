@@ -1,26 +1,26 @@
-﻿
-using RailwayReservationLibrary.DataAccess;
+﻿using RailwayReservationLibrary.DataAccess;
+using RailwayReservationLibrary.Entities;
 using System.Data.SqlClient;
 
-namespace RailwayReservationLibrary.Entities
+namespace RailwayReservationLibrary.Logic
 {
     public class TrainDataLogic
     {
         public int CreateTrain(Trains train)
         {
-            using(SqlConnection connection = ApplicationDbContext.ConnectToDB())
+            using (SqlConnection connection = ApplicationDbContext.ConnectToDB())
             {
                 string sqlInsertQuery = $"Insert into Trains (TrainName, Description, NoOfCoaches, RouteId) Values ('{train.TrainName}', '{train.Description}', '{train.NoOfCoaches}', '{train.RouteId}');";
 
                 SqlCommand cmd = new SqlCommand(sqlInsertQuery, connection);
                 return cmd.ExecuteNonQuery();
-            }            
+            }
         }
 
 
-        public int UpdateTrain(Trains train) 
+        public int UpdateTrain(Trains train)
         {
-            using(SqlConnection connection = ApplicationDbContext.ConnectToDB())
+            using (SqlConnection connection = ApplicationDbContext.ConnectToDB())
             {
                 string sqlUpdateQuery = $"Update Trains Set TrainName = '{train.TrainName}', Description = '{train.Description}', NoOfCoaches = '{train.NoOfCoaches}', RouteId = '{train.RouteId}' where Id = '{train.Id}'";
 
@@ -31,7 +31,7 @@ namespace RailwayReservationLibrary.Entities
 
         public Trains Find(string trainName)
         {
-            using(SqlConnection connection = ApplicationDbContext.ConnectToDB())
+            using (SqlConnection connection = ApplicationDbContext.ConnectToDB())
             {
                 Trains train = new Trains();
                 string sqlFindQuery = $"Select * from trains where TrainName = @TrainName";
@@ -57,7 +57,7 @@ namespace RailwayReservationLibrary.Entities
 
         public List<Trains> GetAllTrains()
         {
-            using(SqlConnection connection = ApplicationDbContext.ConnectToDB())
+            using (SqlConnection connection = ApplicationDbContext.ConnectToDB())
             {
                 List<Trains> trains = new List<Trains>();
                 string sqlSelectAll = "Select * from Trains";
@@ -80,7 +80,7 @@ namespace RailwayReservationLibrary.Entities
                 }
 
                 return trains;
-            }            
+            }
         }
     }
 }
