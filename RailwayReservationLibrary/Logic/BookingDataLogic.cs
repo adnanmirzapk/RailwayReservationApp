@@ -7,11 +7,11 @@ namespace RailwayReservationLibrary.Logic
 {
     public class BookingDataLogic
     {
-        public List<Bookings> GetAll()
+        public List<Reservations> GetAll()
         {
             using(SqlConnection connection = ApplicationDbContext.ConnectToDB())
             {
-                List<Bookings> bookings = new List<Bookings>();
+                List<Reservations> bookings = new List<Reservations>();
                 string sqlQuery = "Select * from Bookings";
 
                 return bookings;

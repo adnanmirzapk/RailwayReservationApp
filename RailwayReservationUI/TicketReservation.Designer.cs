@@ -116,10 +116,10 @@
             lblPassengerName = new Label();
             txtStepCounter = new TextBox();
             pnlTermsAndBookButton = new Panel();
-            label23 = new Label();
-            label24 = new Label();
-            label25 = new Label();
             btnConfirmBooking = new Button();
+            label25 = new Label();
+            label24 = new Label();
+            label23 = new Label();
             pnlTicketReservationForm.SuspendLayout();
             pnlPassengerInformation.SuspendLayout();
             pnlGridViewSearchedTrains.SuspendLayout();
@@ -1163,39 +1163,6 @@
             pnlTermsAndBookButton.TabIndex = 17;
             pnlTermsAndBookButton.Visible = false;
             // 
-            // label23
-            // 
-            label23.AutoSize = true;
-            label23.Font = new Font("Segoe UI Semibold", 11.25F, FontStyle.Bold, GraphicsUnit.Point);
-            label23.ForeColor = SystemColors.GradientActiveCaption;
-            label23.Location = new Point(14, 11);
-            label23.Name = "label23";
-            label23.Size = new Size(532, 20);
-            label23.TabIndex = 0;
-            label23.Text = "Please review the booking details carefully, then click on the below button to";
-            // 
-            // label24
-            // 
-            label24.AutoSize = true;
-            label24.Font = new Font("Segoe UI Semibold", 11.25F, FontStyle.Bold, GraphicsUnit.Point);
-            label24.ForeColor = SystemColors.GradientActiveCaption;
-            label24.Location = new Point(14, 34);
-            label24.Name = "label24";
-            label24.Size = new Size(541, 20);
-            label24.TabIndex = 0;
-            label24.Text = "confirm the booking. Check the refund policy in case if there us any change in";
-            // 
-            // label25
-            // 
-            label25.AutoSize = true;
-            label25.Font = new Font("Segoe UI Semibold", 11.25F, FontStyle.Bold, GraphicsUnit.Point);
-            label25.ForeColor = SystemColors.GradientActiveCaption;
-            label25.Location = new Point(14, 59);
-            label25.Name = "label25";
-            label25.Size = new Size(112, 20);
-            label25.TabIndex = 0;
-            label25.Text = "the travle plan.";
-            // 
             // btnConfirmBooking
             // 
             btnConfirmBooking.BackColor = Color.FromArgb(34, 43, 65);
@@ -1214,7 +1181,40 @@
             btnConfirmBooking.Text = "Click To Confirm Booking";
             btnConfirmBooking.TextAlign = ContentAlignment.MiddleLeft;
             btnConfirmBooking.UseVisualStyleBackColor = false;
-            btnConfirmBooking.Click += btnNext_Click;
+            btnConfirmBooking.Click += btnConfirmBooking_Click;
+            // 
+            // label25
+            // 
+            label25.AutoSize = true;
+            label25.Font = new Font("Segoe UI Semibold", 11.25F, FontStyle.Bold, GraphicsUnit.Point);
+            label25.ForeColor = SystemColors.GradientActiveCaption;
+            label25.Location = new Point(14, 59);
+            label25.Name = "label25";
+            label25.Size = new Size(112, 20);
+            label25.TabIndex = 0;
+            label25.Text = "the travle plan.";
+            // 
+            // label24
+            // 
+            label24.AutoSize = true;
+            label24.Font = new Font("Segoe UI Semibold", 11.25F, FontStyle.Bold, GraphicsUnit.Point);
+            label24.ForeColor = SystemColors.GradientActiveCaption;
+            label24.Location = new Point(14, 34);
+            label24.Name = "label24";
+            label24.Size = new Size(541, 20);
+            label24.TabIndex = 0;
+            label24.Text = "confirm the booking. Check the refund policy in case if there us any change in";
+            // 
+            // label23
+            // 
+            label23.AutoSize = true;
+            label23.Font = new Font("Segoe UI Semibold", 11.25F, FontStyle.Bold, GraphicsUnit.Point);
+            label23.ForeColor = SystemColors.GradientActiveCaption;
+            label23.Location = new Point(14, 11);
+            label23.Name = "label23";
+            label23.Size = new Size(532, 20);
+            label23.TabIndex = 0;
+            label23.Text = "Please review the booking details carefully, then click on the below button to";
             // 
             // TicketReservation
             // 

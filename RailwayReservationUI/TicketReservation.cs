@@ -1,9 +1,11 @@
-﻿using RailwayReservationLibrary.Entities;
+﻿using RailwayReservationLibrary.DataAccess;
+using RailwayReservationLibrary.Entities;
 using RailwayReservationLibrary.Logic;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Data.SqlClient;
 using System.Drawing;
 using System.Linq;
 using System.Text;
@@ -17,7 +19,9 @@ namespace RailwayReservationUI
         StationDataLogic _stations = new StationDataLogic();
         TrainDataLogic _trains = new TrainDataLogic();
         RouteDataLogic _routes = new RouteDataLogic();
-
+        int _trainId;
+        int _routeId;
+        
         public TicketReservation()
         {
             InitializeComponent();
@@ -46,14 +50,16 @@ namespace RailwayReservationUI
                           on train.RouteId equals route.Id
                           where (int)cmbFrom.SelectedValue == route.DepartureStationId && (int)cmbTo.SelectedValue == route.DestinationStationId
                           select new
-                          {
+                          {                              
                               TrainName = train.TrainName,
                               Description = train.Description,
                               Fare = route.Fare,
                               Distance = route.Distance,
                               NoOfCoaches = train.NoOfCoaches,
-                              RouteName = route.RouteName
+                              RouteName = route.RouteName,                           
                           };
+
+            
 
             pnlGridViewSearchedTrains.Visible = true;
 
@@ -119,11 +125,19 @@ namespace RailwayReservationUI
                 lblFareAmount.Text = dataGridViewSearchedTrains.SelectedRows[0].Cells[2].Value.ToString();
                 lblDistanceValue.Text = dataGridViewSearchedTrains.SelectedRows[0].Cells[3].Value.ToString();
 
+                //Getting the key of route based on the FromStation and ToStation
+                _routeId = routes
+                       .Where(station => station.DepartureStationId == Convert.ToInt32(cmbFrom.SelectedValue) && station.DestinationStationId == Convert.ToInt32(cmbTo.SelectedValue))
+                       .Select(route => route.Id) .FirstOrDefault();
+
+                _trainId = trains
+                            .Where(train => train.RouteId == _routeId)
+                            .Select(train => train.Id).FirstOrDefault();
 
                 btnPrevious.Enabled = true;
                 pnlGridViewSearchedTrains.Visible = false;
                 pnlPassengerInformation.Visible = true;
-                pnlPassengerInformation.Location = new Point(5, 273);                
+                pnlPassengerInformation.Location = new Point(5, 273);
             }
 
             if (txtStepCounter.Text == "Step2")
@@ -145,19 +159,19 @@ namespace RailwayReservationUI
                 int infantsTotal = (Convert.ToInt32(lblInfantsValue.Text) * Convert.ToInt32(lblInfantsFare.Text));
                 int grandTotal = adultsTotal + childrensTotal + infantsTotal;
 
-                if(txtNoOfAdults.Text != null)
+                if (txtNoOfAdults.Text != null)
                 {
                     lblAdultsTotalAmount.Text = adultsTotal.ToString();
                 }
-                if(txtNoOfChildrens.Text != null)
+                if (txtNoOfChildrens.Text != null)
                 {
                     lblChildrensTotalAmount.Text = childrensTotal.ToString();
                 }
-                if(txtNoOfInfants.Text != null)
+                if (txtNoOfInfants.Text != null)
                 {
                     lblInfantsTotalAmount.Text = infantsTotal.ToString();
                 }
-                if(grandTotal > 0)
+                if (grandTotal > 0)
                 {
                     lblGrandTotalAmount.Text = grandTotal.ToString();
                 }
@@ -174,7 +188,7 @@ namespace RailwayReservationUI
             {
                 txtStepCounter.Text = "Step2";
             }
-                     
+
         }
 
         private void btnPrevious_Click(object sender, EventArgs e)
@@ -195,7 +209,43 @@ namespace RailwayReservationUI
             CalculateFare(cmbTravelClass.SelectedItem.ToString());
         }
 
+        private void btnConfirmBooking_Click(object sender, EventArgs e)
+        {
+            string sqlQuery = "Insert into Reservations (TrainId, RouteId, Class, PassengerName, CNIC, TotalAdultPassengers, TotalChildPassengers, TotalInfantPassengers) values(@TrainId, @RouteId, @Class, @PassengerName, @CNIC, @TotalAdultPassengers, @TotalChildPassengers, @TotalInfantPassengers)";
 
+            try
+            {
+                using (SqlConnection connection = ApplicationDbContext.ConnectToDB())
+                {
+                    SqlCommand cmd = new SqlCommand(sqlQuery, connection);
+                    cmd.Parameters.AddWithValue("@TrainId", _trainId);
+                    cmd.Parameters.AddWithValue("@RouteId", _routeId);
+                    cmd.Parameters.AddWithValue("@Class", cmbTravelClass.SelectedItem.ToString());
+                    cmd.Parameters.AddWithValue("@PassengerName", txtPassengerName.Text);
+                    cmd.Parameters.AddWithValue("@CNIC", txtPassengerCNIC.Text);
+                    cmd.Parameters.AddWithValue("@TotalAdultPassengers", txtNoOfAdults.Text);
+                    cmd.Parameters.AddWithValue("@TotalChildPassengers", txtNoOfChildrens.Text);
+                    cmd.Parameters.AddWithValue("@TotalInfantPassengers", txtNoOfChildrens.Text);
+
+                    int result = cmd.ExecuteNonQuery();
+
+                    if(result > 0)
+                    {
+                        MessageBox.Show("Ticket booked Successfully");
+                    }
+                    else
+                    {
+                        MessageBox.Show("Problem in booking the tiecket");
+                    }
+
+                }
+            }
+            catch (Exception ex)
+            {
+
+                MessageBox.Show("Problem in sql query or database connectivity! \n" + ex.Message);
+            }            
+        }
 
         //Private methods
         private void CalculateFare(string travelClass)
@@ -219,7 +269,7 @@ namespace RailwayReservationUI
             if (travelClass == "AC")
             {
                 int fare = (Convert.ToInt32(lblFareAmount.Text)) * 30 / 100;
-                AdultsFare = Convert.ToInt32(lblFareAmount.Text) + fare ;
+                AdultsFare = Convert.ToInt32(lblFareAmount.Text) + fare;
                 lblAdultsFareInfo.Text = AdultsFare.ToString();
 
                 ChildrensFare = AdultsFare / 2;
@@ -256,8 +306,6 @@ namespace RailwayReservationUI
 
         }
 
-
-
         private void FillFromToDropdownListWithData()
         {
             cmbFrom.DataSource = _stations.GetAllStations();
@@ -269,8 +317,6 @@ namespace RailwayReservationUI
             cmbTo.DisplayMember = "StationName";
         }
 
-       
-
-       
+        
     }
 }
