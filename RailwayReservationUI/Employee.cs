@@ -28,7 +28,7 @@ namespace RailwayReservationUI
 
         private void Employee_Load(object sender, EventArgs e)
         {
-            
+
             txtSearchText.Enabled = false;
             btnSave.Enabled = false;
             lblResetForm.Enabled = false;
@@ -37,7 +37,7 @@ namespace RailwayReservationUI
             btnEmployeeDepartment.Enabled = false;
 
             FillGridViewWithEmployeeData();
-        }        
+        }
 
         private void btnEmployeeClose_Click(object sender, EventArgs e)
         {
@@ -150,6 +150,35 @@ namespace RailwayReservationUI
             {
                 MessageBox.Show("Employee Form: Problem in saving or upating employee data \n" + ex.Message);
             }
+        }
+
+        private void btnEmployeeDelete_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                RailwayReservationLibrary.Entities.Employee emp = new RailwayReservationLibrary.Entities.Employee
+                {
+                    Id = employeeId
+                };
+
+                int result = employeeLogic.DeleteEmployee(emp);
+                if(result > 0)
+                {
+                    MessageBox.Show("Employee deleted successfully");
+                    ResetFormFields();
+                    FillGridViewWithEmployeeData();
+                }
+                else
+                {
+                    MessageBox.Show("Problem in deleting data");
+                }
+            }
+            catch (Exception ex)
+            {
+
+                MessageBox.Show("Employee Form: Problem in saving or deleting employee data \n" + ex.Message);
+            }
+
         }
 
         private void btnGo_Click(object sender, EventArgs e)
@@ -292,7 +321,9 @@ namespace RailwayReservationUI
 
         private void btnTicketBooking_Click(object sender, EventArgs e)
         {
-           
+
         }
+
+        
     }
 }

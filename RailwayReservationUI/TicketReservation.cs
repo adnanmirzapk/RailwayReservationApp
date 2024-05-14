@@ -154,8 +154,8 @@ namespace RailwayReservationUI
                 lblChildrensFare.Text = lblChildrensFareInfo.Text;
                 lblInfantsFare.Text = lblInfantsFareInfo.Text;
 
-                int adultsTotal = (Convert.ToInt32(lblChildrensValue.Text) * Convert.ToInt32(lblAdultsFare.Text));
-                int childrensTotal = (Convert.ToInt32(lblAdultsValue.Text) * Convert.ToInt32(lblChildrensFare.Text));
+                int adultsTotal = (Convert.ToInt32(lblAdultsValue.Text) * Convert.ToInt32(lblAdultsFare.Text));
+                int childrensTotal = (Convert.ToInt32(lblChildrensValue.Text) * Convert.ToInt32(lblChildrensFare.Text));
                 int infantsTotal = (Convert.ToInt32(lblInfantsValue.Text) * Convert.ToInt32(lblInfantsFare.Text));
                 int grandTotal = adultsTotal + childrensTotal + infantsTotal;
 

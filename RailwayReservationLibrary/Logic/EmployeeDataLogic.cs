@@ -30,7 +30,20 @@ namespace RailwayReservationLibrary.Logic
 
                 return cmd.ExecuteNonQuery();
             }            
-        }    
+        }
+        
+        public int DeleteEmployee(Employee employee)
+        {
+            string query = $"Delete from Employees Where Id = @Id";
+
+            using (SqlConnection connection = ApplicationDbContext.ConnectToDB())
+            {
+                SqlCommand cmd = new SqlCommand(query, connection);
+                cmd.Parameters.AddWithValue("@Id", employee.Id);
+
+                return cmd.ExecuteNonQuery();
+            }
+        }
 
         public Employee FindEmployee(string input) 
         {            
